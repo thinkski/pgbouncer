@@ -101,8 +101,8 @@ action :setup do
 
   # build the userlist, pgbouncer.ini, upstart conf and logrotate.d templates
   {
-    "/etc/pgbouncer/userlist-#{new_resource.db_alias}.txt" => 'etc/pgbouncer/userlist.txt.erb',
-    "/etc/pgbouncer/pgbouncer-#{new_resource.db_alias}.ini" => 'etc/pgbouncer/pgbouncer.ini.erb',
+    "/etc/pgbouncer/userlist-#{new_resource.db_alias}.txt" => 'etc/pgbouncer/userlist2.txt.erb',
+    "/etc/pgbouncer/pgbouncer-#{new_resource.db_alias}.ini" => 'etc/pgbouncer/pgbouncer2.ini.erb',
     "/etc/init/pgbouncer-#{new_resource.db_alias}.conf" => 'etc/init/pgbouncer.conf.erb',
     "/etc/logrotate.d/pgbouncer-#{new_resource.db_alias}" => 'etc/logrotate.d/pgbouncer-logrotate.d.erb'
   }.each do |key, source_template|
@@ -149,8 +149,8 @@ end
 
 action :teardown do
 
-  { "/etc/pgbouncer/userlist-#{new_resource.db_alias}.txt" => 'etc/pgbouncer/userlist.txt.erb',
-    "/etc/pgbouncer/pgbouncer-#{new_resource.db_alias}.ini" => 'etc/pgbouncer/pgbouncer.ini.erb',
+  { "/etc/pgbouncer/userlist-#{new_resource.db_alias}.txt" => 'etc/pgbouncer/userlist2.txt.erb',
+    "/etc/pgbouncer/pgbouncer-#{new_resource.db_alias}.ini" => 'etc/pgbouncer/pgbouncer2.ini.erb',
     "/etc/init/pgbouncer-#{new_resource.db_alias}.conf" => 'etc/init/pgbouncer.conf.erb',
     "/etc/logrotate.d/pgbouncer-#{new_resource.db_alias}" => 'etc/logrotate.d/pgbouncer-logrotate.d'
   }.each do |destination_file, source_template|

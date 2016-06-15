@@ -5,7 +5,7 @@
 ;;   client_encoding= datestyle= timezone=
 ;;   pool_size= connect_query=
 [databases]
-<%= @db_alias %> = host=<%= @db_host %> port=<%= @db_port %> dbname=<%= @db_name %> <%= "connect_query='#{@connect_query}'" unless @connect_query.nil? || @connect_query.empty? %>
+<%= (@db_ref.nil? || @db_ref.empty?)? @db_alias: @db_ref %> = host=<%= @db_host %> port=<%= @db_port %> dbname=<%= @db_name %> <%= "connect_query='#{@connect_query}'" unless @connect_query.nil? || @connect_query.empty? %>
  
 ;; Configuration section
 [pgbouncer]
