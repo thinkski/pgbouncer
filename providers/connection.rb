@@ -57,7 +57,7 @@ action :setup do
   # install the pgbouncer package
   #
   package 'pgbouncer' do
-    action [:install, :upgrade]
+    action [:install]
   end
 
   service "pgbouncer-#{new_resource.db_alias}" do
