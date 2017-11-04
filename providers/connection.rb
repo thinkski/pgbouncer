@@ -142,6 +142,16 @@ action :setup do
       notifies :restart, "service[pgbouncer-#{new_resource.db_alias}]"
       variables(properties)
     end
+  elsif ['ubuntu', 'debian'].include?(node['platform'])
+    template "/etc/systemd/system/pgbouncer-#{new_resource.db_alias}.service" do
+      cookbook 'pgbouncer'
+      source "etc/systemd/system/pgbouncer.service.erb"
+      owner 'root'
+      group 'root'
+      mode 0755
+      notifies :restart, "service[pgbouncer-#{new_resource.db_alias}]"
+      variables(properties)
+    end
   end
 
   new_resource.updated_by_last_action(true)
@@ -168,7 +178,15 @@ action :teardown do
         action :delete
       end
     end
+  elsif ['ubuntu', 'debian'].include?(node['platform'])
+    { "/etc/systemd/system/pgbouncer-#{new_resource.db_alias}" => 'etc/systemd/system/pgbouncer.service.erb' 
+    }.each do |destination_file, source_template|
+      file destination_file do
+        action :delete
+      end
+    end
   end
 
   new_resource.updated_by_last_action(true)
 end
+
