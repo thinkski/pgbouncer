@@ -1,0 +1,12 @@
+[Unit]
+Description=A lightweight connection pooler for PostgreSQL
+After=network.target
+
+[Service]
+User=pgbouncer
+ExecStart=/usr/sbin/pgbouncer /etc/pgbouncer/pgbouncer-<%= @db_alias %>.ini
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+
